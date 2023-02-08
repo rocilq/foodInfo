@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "47529932100",
+    "firebase_url": "https://foodinfo-69a32-default-rtdb.firebaseio.com",
+    "project_id": "foodinfo-69a32",
+    "storage_bucket": "foodinfo-69a32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47529932100:android:258ba8399c2ef908f35311",
+        "android_client_info": {
+          "package_name": "org.insbaixcamp.reus.foodinfo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47529932100-hi4iip5ji5402oipjv8hlhg0gng9m0s5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiVtG0uj4h35Ke7R1ZhD6OYx37bNub9qE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47529932100-hi4iip5ji5402oipjv8hlhg0gng9m0s5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

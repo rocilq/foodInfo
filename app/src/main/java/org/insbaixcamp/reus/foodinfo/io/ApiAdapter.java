@@ -1,5 +1,7 @@
 package org.insbaixcamp.reus.foodinfo.io;
 
+import static org.insbaixcamp.reus.foodinfo.MainActivity.BARCODE;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -11,7 +13,7 @@ public class ApiAdapter {
     /**
      * Localhost IP for AVD emulators: 10.0.2.2
      */
-    private static final String BASE_URL = "https://world.openfoodfacts.org/api/v0/product/";
+    private static final String BASE_URL = "https://world.openfoodfacts.org/api/v0/product/" + BARCODE;
 
     public static ApiService getApiService() {
         // Creamos un interceptor y le indicamos el log level a usar

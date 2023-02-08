@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.CaptureActivity;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
@@ -17,7 +18,7 @@ import com.journeyapps.barcodescanner.ScanOptions;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     Button camera;
 
-    public String resultado;
+    static String resultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         camera = findViewById(R.id.button_cam);
         camera.setOnClickListener(this);
-
 
     }
 
@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             resultado = result.getContents();
         }
     });
+
+    public static final String BARCODE = resultado;
+
+
 
 
 

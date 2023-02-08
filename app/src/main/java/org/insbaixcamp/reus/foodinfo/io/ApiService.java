@@ -1,5 +1,7 @@
 package org.insbaixcamp.reus.foodinfo.io;
 
+
+import org.insbaixcamp.reus.foodinfo.MainActivity;
 import org.insbaixcamp.reus.foodinfo.io.response.ProductResponse;
 
 import retrofit2.Call;
@@ -10,7 +12,10 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiService {
-    @GET("product")
+
+    @GET("code")
+
+
     Call<ProductResponse> getDiseases();
 
 //    @FormUrlEncoded
