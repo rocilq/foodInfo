@@ -11,7 +11,7 @@ public class ApiAdapter {
     /**
      * Localhost IP for AVD emulators: 10.0.2.2
      */
-    private static final String BASE_URL = "https://world.openfoodfacts.org/api/v0/";
+    private static final String BASE_URL = "https://world.openfoodfacts.org/api/v0/product/";
 
     public static ApiService getApiService() {
         // Creamos un interceptor y le indicamos el log level a usar
