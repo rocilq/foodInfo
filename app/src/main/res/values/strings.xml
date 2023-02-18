@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">foodInfo</string>
+    <string name="b_account">Mi cuenta</string>
+    <string name="b_search">Buscar productos</string>
+    <string name="b_scan">Escanear producto</string>
+    <string name="ti_email_hint">Correo electrónico</string>
+    <string name="ti_password_hint">Contraseña</string>
+    <string name="b_login">Iniciar sesión</string>
+    <string name="tv_no_account">No tienes cuenta?</string>
+    <string name="tv_create_account">Crea una cuenta nueva</string>
+    <string name="tv_login">INICIA SESIÓN</string>
+    <string name="tv_forgot_password">Has olvidado la contraseña?</string>
+    <string name="tv_account">MI CUENTA</string>
+    <string name="tv_search">BUSCAR PRODUCTO</string>
+    <string name="tv_scan">ESCANEAR PRODUCTO</string>
 </resources>

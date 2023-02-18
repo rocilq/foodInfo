@@ -108,7 +108,6 @@
         android:adjustViewBounds="true"
         android:src="@drawable/google_icon"
         android:contentDescription="Iniciar sesión con Google"
-        android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bLogin" />
