@@ -3,6 +3,10 @@ package org.insbaixcamp.reus.foodinfo.io;
 
 import org.insbaixcamp.reus.foodinfo.MainActivity;
 import org.insbaixcamp.reus.foodinfo.io.response.ProductResponse;
+import org.insbaixcamp.reus.foodinfo.model.Code;
+import org.insbaixcamp.reus.foodinfo.model.Product;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -14,7 +18,7 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @GET("code")
-    Call<ProductResponse> getDiseases();
+    Call<Code> getCode();
 
 //    @FormUrlEncoded
 //    @POST("upload/photo")

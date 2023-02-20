@@ -1,22 +1,33 @@
 package org.insbaixcamp.reus.foodinfo.io;
 
-import static org.insbaixcamp.reus.foodinfo.MainActivity.BARCODE;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiAdapter {
+public class ApiAdapter extends Activity {
     private static ApiService API_SERVICE;
 
-    /**
-     * Localhost IP for AVD emulators: 10.0.2.2
-     */
-    private static final String BASE_URL = "https://world.openfoodfacts.org/api/v0/product/" + BARCODE;
 
-    public static ApiService getApiService() {
+
+
+    public static ApiService getApiService(String data) {
+
+        /**
+         * Localhost IP for AVD emulators: 10.0.2.2
+         *
+         */
+
+         String BASE_URL = "https://world.openfoodfacts.org/api/v0/product/" + data + "/" ;
+
         // Creamos un interceptor y le indicamos el log level a usar
+
+
         final HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
