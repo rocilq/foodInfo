@@ -3,6 +3,7 @@ package org.insbaixcamp.reus.foodinfo;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -22,16 +23,18 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements Callback<Code> {
 
-    ImageButton camara;
-
-    String resultado;
+    private String ultimoCodigo = "";
 
     private final ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
-        if (result.getContents() == null){
+        if (result.getContents() == null) {
             Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
         } else {
-            resultado = result.getContents();
-            Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            String codigo = result.getContents();
+            Toast.makeText(this, "Scanned: " + codigo, Toast.LENGTH_LONG).show();
+            if (codigo != null) {
+                ultimoCodigo = codigo;
+                call(ultimoCodigo);
+            }
         }
     });
 
@@ -40,11 +43,9 @@ public class MainActivity extends AppCompatActivity implements Callback<Code> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        camara.findViewById(R.id.ibScan);
+        ImageButton camara = findViewById(R.id.ibScan);
 
         camara.setOnClickListener(v -> scanCode());
-
-        call(resultado);
     }
 
     private void scanCode() {
@@ -56,17 +57,13 @@ public class MainActivity extends AppCompatActivity implements Callback<Code> {
         options.setOrientationLocked(true);
         options.setCaptureActivity(ActivityCap.class);
 
-
         barLauncher.launch(options);
-
     }
 
-
-    public void call(String result) {
-        Call<Code> call = ApiAdapter.getApiService(resultado).getCode();
+    public void call(String ultimoCodigo) {
+        Call<Code> call = ApiAdapter.getApiService().getCode(ultimoCodigo);
         call.enqueue(this);
     }
-
 
     @Override
     public void onResponse(Call<Code> call, Response<Code> response) {
