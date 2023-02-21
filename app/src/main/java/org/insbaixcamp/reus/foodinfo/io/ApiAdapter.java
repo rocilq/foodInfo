@@ -16,14 +16,14 @@ public class ApiAdapter extends Activity {
 
 
 
-    public static ApiService getApiService(String data) {
+    public static ApiService getApiService(String resultado) {
 
         /**
          * Localhost IP for AVD emulators: 10.0.2.2
          *
          */
 
-         String BASE_URL = "https://world.openfoodfacts.org/api/v0/product/" + data + "/" ;
+         String BASE_URL = "https://world.openfoodfacts.org/api/v0/product/" + resultado +  "/" ;
 
         // Creamos un interceptor y le indicamos el log level a usar
 

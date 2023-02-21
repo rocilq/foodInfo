@@ -6,111 +6,90 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
-        android:id="@+id/ivBackgroundLogin"
+        android:id="@+id/ivBackgroundHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/app_background" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiEmail"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="271dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="70dp"
-        android:hint="@string/ti_email_hint"
-        android:textColorHint="#A7A7A7"
-        app:boxStrokeColor="#EAEAEE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEmail"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:textColor="#5B5B5B"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            tools:ignore="TouchTargetSizeCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- La contraseña es visible por defecto, hay que ocultarla y que el toggle la muestre-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="271dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="310dp"
-        android:layout_marginEnd="70dp"
-        android:hint="@string/ti_password_hint"
-        android:textColorHint="#A7A7A7"
-        app:endIconMode="password_toggle"
-        app:boxStrokeColor="#EAEAEE"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageButton
+        android:id="@+id/ibAccount"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="200dp"
+        android:backgroundTint="#97CEE4"
+        android:contentDescription="Mi cuenta"
+        android:padding="20dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toStartOf="@+id/ibSearch"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputPassword"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:textColor="#5B5B5B"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            tools:ignore="TouchTargetSizeCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/bLogin"
-        android:layout_width="271dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/b_login"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tiPassword" />
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="286dp"
-        android:layout_height="66dp"
-        android:text="@string/tv_login"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="normal|bold"
-        app:layout_constraintBottom_toTopOf="@+id/tiEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.407" />
+        app:srcCompat="@drawable/profile_icon" />
 
     <ImageButton
-        android:id="@+id/ibGoogleLogin"
-        android:layout_width="271dp"
-        android:layout_height="55dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/google_icon"
-        android:contentDescription="Iniciar sesión con Google"
+        android:id="@+id/ibSearch"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="200dp"
+        android:backgroundTint="#F8F7AA"
+        android:contentDescription="Buscar producto"
+        android:padding="30dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ibAccount"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/search_product" />
+
+    <ImageButton
+        android:id="@+id/ibScan"
+        android:layout_width="375dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="7dp"
+        android:backgroundTint="#FFBEBE"
+        android:contentDescription="Escanear producto"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/ibAccount"
+        app:srcCompat="@drawable/scan" />
+
+    <TextView
+        android:id="@+id/tvAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/tv_account"
+        android:textColor="#37474F"
+        app:layout_constraintBottom_toBottomOf="@+id/ibAccount"
+        app:layout_constraintEnd_toEndOf="@+id/ibAccount"
+        app:layout_constraintStart_toStartOf="@+id/ibAccount" />
+
+    <TextView
+        android:id="@+id/tvSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/tv_search"
+        app:layout_constraintBottom_toBottomOf="@+id/ibSearch"
+        app:layout_constraintEnd_toEndOf="@+id/ibSearch"
+        app:layout_constraintStart_toStartOf="@+id/ibSearch" />
+
+    <TextView
+        android:id="@+id/tvScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/tv_scan"
+        android:textColor="#6D4C41"
+        app:layout_constraintBottom_toBottomOf="@+id/ibScan"
+        app:layout_constraintEnd_toEndOf="@+id/ibScan"
+        app:layout_constraintStart_toStartOf="@+id/ibScan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
