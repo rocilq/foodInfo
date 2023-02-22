@@ -24,4 +24,7 @@ public interface ApiService {
     // Ya está el modelo de product creado, hazlo parecido y el path(code) tiene que ser igual para que coja el codigo
     // ves probando
 
+    @GET("product/{code}")
+    Call<Product> getProduct(@Path("code") String code);
+
 }
