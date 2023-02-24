@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -18,6 +20,8 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private String ultimoCodigo = "";
+
+    private FirebaseAuth mAuth;
 
     private final ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
         if (result.getContents() == null) {
@@ -44,8 +48,25 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         ImageButton camara = findViewById(R.id.ibScan);
+        ImageButton user = findViewById(R.id.ibAccount);
+        ImageButton search = findViewById(R.id.ibSearch);
 
         camara.setOnClickListener(v -> scanCode());
+        user.setOnClickListener(v -> account());
+
+    }
+
+    private void account() {
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            Intent intent = new Intent(MainActivity.this, Account.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+        }
 
 
     }

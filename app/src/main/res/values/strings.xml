@@ -16,4 +16,6 @@
     <string name="no_allergens">"Este producto no tiene alérgenos o no están registrados. "
                                         "Por favor, consulta los detalles en el producto."</string>
     <string name="product_name">Nombre del producto</string>
+
+    <string name="logout">Logout</string>
 </resources>
