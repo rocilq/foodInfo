@@ -2,15 +2,18 @@ package org.insbaixcamp.reus.foodinfo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -19,28 +22,33 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProductInfo extends AppCompatActivity {
 
-//    TextView tvprueba;
+    TextView tvNoAllergens;
 
+    ImageView ivProducto;
     String codigo;
     private TextView productNameTextView;
-    private TextView allergensTextView;
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_info);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         productNameTextView = findViewById(R.id.productNameTextView);
+        ivProducto = findViewById(R.id.ivProducto);
         //allergensTextView = findViewById(R.id.allergensTextView);
          listView = findViewById(R.id.lista);
 
         // Obtener el valor del extra "codigo" del Intent
          codigo = getIntent().getStringExtra("codigo");
 
+         tvNoAllergens = findViewById(R.id.tvNoAllergens);
+         tvNoAllergens.setVisibility(View.GONE);
 //        // Mostrar el código en un TextView, por ejemplo
 //        tvprueba = findViewById(R.id.tvPrueba);
 //        tvprueba.setText(codigo);
@@ -50,7 +58,7 @@ public class ProductInfo extends AppCompatActivity {
     }
 
     private void jsonRequest(String codigo) {
-        String url = "https://world.openfoodfacts.org/api/v2/product/" + codigo + ".json";
+        String url = "https://world.openfoodfacts.org/api/v0/product/" + codigo + ".json";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -62,7 +70,8 @@ public class ProductInfo extends AppCompatActivity {
                             String allergens = product.getString("allergens");
 
                             if (allergens.equals("")){
-                                //allergensTextView.setText(R.string.no_allergens);
+                                tvNoAllergens.setVisibility(View.VISIBLE);
+                                tvNoAllergens.setText(R.string.no_allergens);
                             }else{
 
                                 // Separar la cadena en una matriz de cadenas
@@ -82,13 +91,16 @@ public class ProductInfo extends AppCompatActivity {
                                         R.layout.item,R.id.tv_allergen_name, allergensList);
                                 listView.setAdapter(adapter);
 
-                                //allergensTextView.setText(allergens);
                             }
 
 
 
                             // Actualiza la interfaz de usuario con la información obtenida
                             productNameTextView.setText(productName);
+
+                            // Carga la imagen del producto en el ImageView usando Volley
+                            String imageUrl = product.getString("image_front_small_url");
+                            loadImage(imageUrl,ivProducto);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -107,11 +119,25 @@ public class ProductInfo extends AppCompatActivity {
         Volley.newRequestQueue(this).add(jsonObjectRequest);
     }
 
+    private void loadImage(String imageUrl, ImageView ivProducto) {
+        ImageRequest imageRequest = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                // Actualiza la interfaz de usuario con la imagen cargada
+                ivProducto.setImageBitmap(response);
+                ivProducto.setVisibility(View.VISIBLE);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER_CROP, null,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Maneja el error de la solicitud
+                        error.printStackTrace();
+                    }
+                });
 
-    public void separarAlergenos(String cadena){
-//        String allergens = "en:milk,en:nuts,en:soybeans";
-
-
+        // Agrega la solicitud a la cola de solicitudes de Volley
+        Volley.newRequestQueue(this).add(imageRequest);
     }
 
 }

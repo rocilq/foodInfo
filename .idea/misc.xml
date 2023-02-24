@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/drawable/splash_screen.xml" value="0.1865" />
+        <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/activity_login.xml" value="0.21302083333333333" />
         <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/activity_main.xml" value="0.19427083333333334" />
         <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/activity_product_info.xml" value="0.2" />
+        <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/activity_splash.xml" value="0.15989583333333332" />
         <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/home.xml" value="0.25416666666666665" />
         <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/item.xml" value="0.253125" />
         <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/login.xml" value="0.25416666666666665" />

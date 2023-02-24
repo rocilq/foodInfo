@@ -6,10 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F2F2F2">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivProducto"
         android:layout_width="324dp"
         android:layout_height="304dp"
         tools:srcCompat="@tools:sample/avatars" />
@@ -24,9 +25,32 @@
         android:textColor="@android:color/black"
         android:layout_marginBottom="8dp"/>
 
-    <ListView
-        android:id="@+id/lista"
+    <TextView
+        android:id="@+id/tvNoAllergens"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="9dp"
+            app:cardElevation="5dp">
+
+            <ListView
+                android:id="@+id/lista"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
 
 </LinearLayout>
