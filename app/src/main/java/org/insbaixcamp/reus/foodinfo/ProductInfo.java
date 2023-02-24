@@ -49,13 +49,13 @@ public class ProductInfo extends AppCompatActivity {
         productNameTextView = findViewById(R.id.productNameTextView);
         ivProducto = findViewById(R.id.ivProducto);
         //allergensTextView = findViewById(R.id.allergensTextView);
-         listView = findViewById(R.id.lista);
+        listView = findViewById(R.id.lista);
 
         // Obtener el valor del extra "codigo" del Intent
-         codigo = getIntent().getStringExtra("codigo");
+        codigo = getIntent().getStringExtra("codigo");
 
-         tvNoAllergens = findViewById(R.id.tvNoAllergens);
-         tvNoAllergens.setVisibility(View.GONE);
+        tvNoAllergens = findViewById(R.id.tvNoAllergens);
+        tvNoAllergens.setVisibility(View.GONE);
 //        // Mostrar el código en un TextView, por ejemplo
 //        tvprueba = findViewById(R.id.tvPrueba);
 //        tvprueba.setText(codigo);
@@ -76,10 +76,10 @@ public class ProductInfo extends AppCompatActivity {
                             String productName = product.getString("product_name");
                             String allergens = product.getString("allergens");
 
-                            if (allergens.equals("")){
+                            if (allergens.equals("")) {
                                 tvNoAllergens.setVisibility(View.VISIBLE);
                                 tvNoAllergens.setText(R.string.no_allergens);
-                            }else{
+                            } else {
 
                                 // Separar la cadena en una matriz de cadenas
                                 String[] allergensArray = allergens.split(",");
@@ -95,11 +95,10 @@ public class ProductInfo extends AppCompatActivity {
 
                                 // Usar la lista de nombres de alérgenos para crear la lista de elementos en la ListView
                                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                                        R.layout.item,R.id.tv_allergen_name, allergensList);
+                                        R.layout.item, R.id.tv_allergen_name, allergensList);
                                 listView.setAdapter(adapter);
 
                             }
-
 
 
                             // Actualiza la interfaz de usuario con la información obtenida
@@ -107,7 +106,7 @@ public class ProductInfo extends AppCompatActivity {
 
                             // Carga la imagen del producto en el ImageView usando Volley
                             String imageUrl = product.getString("image_front_small_url");
-                            loadImage(imageUrl,ivProducto, productName);
+                            loadImage(imageUrl, ivProducto, productName);
 
 //                            mAuth = FirebaseAuth.getInstance();
 //                            FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -151,7 +150,11 @@ public class ProductInfo extends AppCompatActivity {
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 if (currentUser != null) {
-                    Bitmap bitmap = ((BitmapDrawable) ivProducto.getDrawable()).getBitmap();
+                    Bitmap image = ((BitmapDrawable) ivProducto.getDrawable()).getBitmap();
+                    Product product = new Product(productName, image);
+
+                    // Agregar el objeto a la lista ProductList
+                    ProductList.getInstance().addProduct(product);
 
                 }
 
