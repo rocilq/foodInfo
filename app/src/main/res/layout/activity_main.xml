@@ -82,4 +82,16 @@
         app:layout_constraintEnd_toEndOf="@+id/ibScan"
         app:layout_constraintStart_toStartOf="@+id/ibScan" />
 
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to AllergyCheck !"
+        app:layout_constraintBottom_toTopOf="@+id/ibAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

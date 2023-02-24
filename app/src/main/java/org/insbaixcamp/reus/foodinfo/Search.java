@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Search extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class Search extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_search);
+            Objects.requireNonNull(getSupportActionBar()).hide();
 
             // Inicializar el SearchView
             SearchView searchView = findViewById(R.id.search_view);
@@ -52,6 +54,9 @@ public class Search extends AppCompatActivity {
                     return false;
                 }
             });
+
+
+            //
         }
 
 

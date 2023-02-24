@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/drawable/splash_screen.xml" value="0.1865" />
-        <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/activity_account.xml" value="0.22644927536231885" />
+        <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/account.xml" value="0.23854166666666668" />
+        <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/activity_account.xml" value="0.264" />
         <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/activity_login.xml" value="0.21302083333333333" />
         <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/activity_main.xml" value="0.19427083333333334" />
         <entry key="..\:/Android/Androidprojects/foodInfo copia/app/src/main/res/layout/activity_product_info.xml" value="0.2" />

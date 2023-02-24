@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
         } else {
             String codigo = result.getContents();
-            Toast.makeText(this, "Scanned: " + codigo, Toast.LENGTH_LONG).show();
             ultimoCodigo = codigo;
 
             // Creao un Intent para lanzar la nueva actividad ProductInfo
@@ -79,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Login.class);
             startActivity(intent);
         }
-
 
     }
 

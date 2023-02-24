@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">foodInfo</string>
+    <string name="app_name">AllergyCheck</string>
     <string name="b_account">Mi cuenta</string>
     <string name="b_search">Buscar productos</string>
     <string name="b_scan">Escanear producto</string>

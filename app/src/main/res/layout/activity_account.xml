@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F2F2F2">
 
     <TextView
         android:id="@+id/tvAccountScreenTitle"
@@ -35,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAccountScreenTitle"
-        app:srcCompat="@drawable/profile_icon" />
+        app:srcCompat="@drawable/pngwing_com" />
 
     <TextView
         android:id="@+id/user_email"
