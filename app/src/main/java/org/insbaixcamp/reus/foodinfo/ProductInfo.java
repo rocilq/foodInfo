@@ -153,8 +153,9 @@ public class ProductInfo extends AppCompatActivity {
                     Bitmap image = ((BitmapDrawable) ivProducto.getDrawable()).getBitmap();
                     Product product = new Product(productName, image, codigo);
 
-                    // Agregar el objeto a la lista ProductList
-                    ProductList.getInstance().addProduct(product);
+                    // Agregar el objeto a la lista ProductList si no está duplicado
+                    ProductList productList = ProductList.getInstance();
+                    productList.addProduct(product);
 
                 }
 

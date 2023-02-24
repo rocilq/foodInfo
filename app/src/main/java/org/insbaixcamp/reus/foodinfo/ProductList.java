@@ -18,10 +18,20 @@ public class ProductList {
     }
 
     public void addProduct(Product product) {
+        // Verificar si el producto ya existe en la lista
+        for (Product p : productList) {
+            if (p.getCodigo().equals(product.getCodigo())) {
+                // El producto ya existe, no se agrega de nuevo
+                return;
+            }
+        }
+        // El producto no existe, se agrega a la lista
         productList.add(product);
     }
 
     public ArrayList<Product> getProducts() {
         return productList;
     }
+
+    public void setProducts(ArrayList<Product> products) { productList = products; }
 }

@@ -20,4 +20,8 @@ public class Product {
     public Bitmap getImage() {
         return image;
     }
+
+    public String getCodigo() {
+        return barcode;
+    }
 }
