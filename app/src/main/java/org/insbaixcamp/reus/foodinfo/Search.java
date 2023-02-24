@@ -1,9 +1,11 @@
 package org.insbaixcamp.reus.foodinfo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import android.os.Bundle;
 import android.widget.ListView;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,6 +21,8 @@ public class Search extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_search);
 
+            // Inicializar el SearchView
+            SearchView searchView = findViewById(R.id.search_view);
 
             // Obtén la lista de productos
             ProductList productList = ProductList.getInstance();
@@ -33,6 +37,21 @@ public class Search extends AppCompatActivity {
             // Configura la ListView
             mListViewProducts = findViewById(R.id.list_view_products);
             mListViewProducts.setAdapter(mAdapter);
+
+            // Agregar un listener para el SearchView
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    // Filtrar los elementos de la lista
+                    mAdapter.getFilter().filter(newText);
+                    return false;
+                }
+            });
         }
 
 
