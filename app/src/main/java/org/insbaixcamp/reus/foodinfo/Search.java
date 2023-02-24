@@ -2,24 +2,32 @@ package org.insbaixcamp.reus.foodinfo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
 
-import java.util.Objects;
+import java.util.HashSet;
 
 public class Search extends AppCompatActivity {
 
+        private ProductAdapter mAdapter;
+        private ListView mListViewProducts;
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_search);
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+            // Obtén la lista de productos
+            ProductList productList = ProductList.getInstance();
+
+            // Crea un adaptador personalizado
+            mAdapter = new ProductAdapter(this, productList.getProducts());
+
+            // Configura la ListView
+            mListViewProducts = findViewById(R.id.list_view_products);
+            mListViewProducts.setAdapter(mAdapter);
+        }
 
 
-    }
 }

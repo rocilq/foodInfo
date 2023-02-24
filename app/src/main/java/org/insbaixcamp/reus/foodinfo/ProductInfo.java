@@ -151,7 +151,7 @@ public class ProductInfo extends AppCompatActivity {
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 if (currentUser != null) {
                     Bitmap image = ((BitmapDrawable) ivProducto.getDrawable()).getBitmap();
-                    Product product = new Product(productName, image);
+                    Product product = new Product(productName, image, codigo);
 
                     // Agregar el objeto a la lista ProductList
                     ProductList.getInstance().addProduct(product);
