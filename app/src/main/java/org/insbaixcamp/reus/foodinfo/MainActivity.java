@@ -53,7 +53,19 @@ public class MainActivity extends AppCompatActivity {
 
         camara.setOnClickListener(v -> scanCode());
         user.setOnClickListener(v -> account());
+        search.setOnClickListener(v -> search());
 
+    }
+
+    private void search() {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            Intent intent = new Intent(MainActivity.this, Search.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "You have to login to see the products scanned" , Toast.LENGTH_LONG).show();
+        }
     }
 
     private void account() {
