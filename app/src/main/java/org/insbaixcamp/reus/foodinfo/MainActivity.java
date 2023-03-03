@@ -1,6 +1,7 @@
 package org.insbaixcamp.reus.foodinfo;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         // Consultar la base de datos para verificar si el código ya existe
         myRef.child(userId).orderByValue().equalTo(code).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Si el código no existe en la base de datos, guardarlo
                 if (!dataSnapshot.exists()) {
                     myRef.child(userId).push().setValue(code);
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Manejar el error si la consulta falla
             }
         });

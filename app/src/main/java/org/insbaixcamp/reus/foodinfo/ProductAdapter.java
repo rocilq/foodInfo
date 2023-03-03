@@ -1,5 +1,6 @@
 package org.insbaixcamp.reus.foodinfo;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+
+    private Context context;
     private List<Product> productList;
 
-    public ProductAdapter(List<Product> productList) {
+    public ProductAdapter(Context context, List<Product> productList) {
+        this.context = context;
         this.productList = productList;
     }
 

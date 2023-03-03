@@ -3,6 +3,7 @@ package org.insbaixcamp.reus.foodinfo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
@@ -77,8 +78,9 @@ public class Search extends AppCompatActivity {
                                         String imageUrl = productJson.getString("image_front_small_url");
                                         Product product = new Product(name, imageUrl);
                                         productList.add(product);
-                                        ProductAdapter adapter = new ProductAdapter(productList);
+                                        ProductAdapter adapter = new ProductAdapter(Search.this, productList);
                                         RecyclerView recyclerView = findViewById(R.id.rv_products);
+                                        recyclerView.setLayoutManager(new LinearLayoutManager(Search.this));
                                         recyclerView.setAdapter(adapter);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
