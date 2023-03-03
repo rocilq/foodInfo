@@ -89,12 +89,13 @@ public class Search extends AppCompatActivity {
                                         adapter.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
+                                                int position = recyclerView.getChildLayoutPosition(view);
+                                                String barcode = barcodesList.get(position);
                                                 Intent intent = new Intent(getApplicationContext(), ProductInfo.class);
                                                 intent.putExtra("codigo", barcode);
                                                 startActivity(intent);
                                             }
                                         });
-
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
