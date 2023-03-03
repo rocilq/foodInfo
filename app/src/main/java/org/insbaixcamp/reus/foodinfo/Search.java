@@ -6,12 +6,14 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.android.volley.Request;
@@ -81,7 +83,19 @@ public class Search extends AppCompatActivity {
                                         ProductAdapter adapter = new ProductAdapter(Search.this, productList);
                                         RecyclerView recyclerView = findViewById(R.id.rv_products);
                                         recyclerView.setLayoutManager(new LinearLayoutManager(Search.this));
+
                                         recyclerView.setAdapter(adapter);
+
+                                        adapter.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Intent intent = new Intent(getApplicationContext(), ProductInfo.class);
+                                                intent.putExtra("codigo", barcode);
+                                                startActivity(intent);
+                                            }
+                                        });
+
+
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }

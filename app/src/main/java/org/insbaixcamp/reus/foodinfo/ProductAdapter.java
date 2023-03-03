@@ -23,6 +23,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     private Context context;
     private List<Product> productList;
+    private View.OnClickListener listener;
 
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
@@ -33,6 +34,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_product, parent, false);
+
+        view.setOnClickListener(this);
+
         return new ViewHolder(view);
     }
 
@@ -48,6 +52,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return productList.size();
     }
 
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (listener != null ){
+            listener.onClick(view);
+        }
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
         public TextView nameTextView;
@@ -59,9 +74,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
     }
 
-    @Override
-    public void onClick(View v) {
-    }
 }
 
 
