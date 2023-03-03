@@ -1,6 +1,7 @@
 package org.insbaixcamp.reus.foodinfo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements View.OnClickListener {
 
     private Context context;
     private List<Product> productList;
@@ -56,6 +57,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             imageView = itemView.findViewById(R.id.product_image);
             nameTextView = itemView.findViewById(R.id.product_name);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
     }
 }
 

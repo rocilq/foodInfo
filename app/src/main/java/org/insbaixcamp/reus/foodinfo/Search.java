@@ -103,6 +103,8 @@ public class Search extends AppCompatActivity {
 
     }
 
+
+
     private void loadImage(String productName, String imageUrl) {
         ImageRequest imageRequest = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
             @Override
