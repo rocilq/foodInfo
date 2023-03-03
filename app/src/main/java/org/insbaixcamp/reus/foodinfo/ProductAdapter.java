@@ -1,6 +1,5 @@
 package org.insbaixcamp.reus.foodinfo;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,84 +10,49 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAdapter /*extends ArrayAdapter<Product> implements Filterable*/ {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+    private List<Product> productList;
 
-    /*private Context mContext;
-    private List<Product> mProductList;
-    private List<Product> mFilteredProductList;
-
-    public ProductAdapter(Context context, List<Product> productList) {
-        super(context, 0, productList);
-        mContext = context;
-        mProductList = productList;
-        mFilteredProductList = productList;
+    public ProductAdapter(List<Product> productList) {
+        this.productList = productList;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View listItem = convertView;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_product, parent, false);
+        return new ViewHolder(view);
+    }
 
-        if (listItem == null) {
-            listItem = LayoutInflater.from(mContext).inflate(R.layout.list_item_product, parent, false);
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Product product = productList.get(position);
+        holder.nameTextView.setText(product.getName());
+        Picasso.get().load(product.getImageUrl()).into(holder.imageView);
+    }
+
+    @Override
+    public int getItemCount() {
+        return productList.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView imageView;
+        public TextView nameTextView;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.product_image);
+            nameTextView = itemView.findViewById(R.id.product_name);
         }
-
-        Product currentProduct = mFilteredProductList.get(position);
-
-        ImageView imageViewProduct = listItem.findViewById(R.id.product_image);
-        imageViewProduct.setImageBitmap(currentProduct.getImage());
-
-        TextView textViewProductName = listItem.findViewById(R.id.product_name);
-        textViewProductName.setText(currentProduct.getName());
-
-        return listItem;
     }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public int getCount() {
-        return mFilteredProductList.size();
-    }
-
-    @Override
-    public Filter getFilter() {
-        Filter filter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-                if (constraint == null || constraint.length() == 0) {
-                    filterResults.count = mProductList.size();
-                    filterResults.values = mProductList;
-                } else {
-                    List<Product> filteredProducts = new ArrayList<>();
-                    for (Product product : mProductList) {
-                        if (product.getName().toLowerCase().contains(constraint.toString().toLowerCase())) {
-                            filteredProducts.add(product);
-                        }
-                    }
-                    filterResults.count = filteredProducts.size();
-                    filterResults.values = filteredProducts;
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mFilteredProductList = (List<Product>) results.values;
-                notifyDataSetChanged();
-            }
-        };
-        return filter;
-    }*/
 }
 
 

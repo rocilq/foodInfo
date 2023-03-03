@@ -129,9 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 // Si el código no existe en la base de datos, guardarlo
                 if (!dataSnapshot.exists()) {
                     myRef.child(userId).push().setValue(code);
-                } else {
-                    // Si el código ya existe, mostrar un mensaje de error o hacer algo más
-                    Toast.makeText(MainActivity.this, "El código de barras ya ha sido registrado", Toast.LENGTH_SHORT).show();
                 }
             }
 

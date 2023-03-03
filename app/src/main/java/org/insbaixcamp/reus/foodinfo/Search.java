@@ -3,6 +3,7 @@ package org.insbaixcamp.reus.foodinfo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -64,7 +66,29 @@ public class Search extends AppCompatActivity {
                     }
 
                     // Aquí puedes usar la lista de códigos de barras para lo que necesites
-
+                    List<Product> productList = new ArrayList<>();
+                    for (String barcode : barcodesList) {
+                        String url = "https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json";
+                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                                response -> {
+                                    try {
+                                        JSONObject productJson = response.getJSONObject("product");
+                                        String name = productJson.getString("product_name");
+                                        String imageUrl = productJson.getString("image_front_small_url");
+                                        Product product = new Product(name, imageUrl);
+                                        productList.add(product);
+                                        ProductAdapter adapter = new ProductAdapter(productList);
+                                        RecyclerView recyclerView = findViewById(R.id.rv_products);
+                                        recyclerView.setAdapter(adapter);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                },
+                                error -> {
+                                    // Manejar errores en la solicitud a la API
+                                });
+                        Volley.newRequestQueue(Search.this).add(request);
+                    }
 
                 }
 
@@ -77,88 +101,13 @@ public class Search extends AppCompatActivity {
 
     }
 
-    public void jsonRequest(String codigo) {
-        String url = "https://world.openfoodfacts.org/api/v0/product/" + codigo + ".json";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            // Procesa la respuesta de la API
-                            JSONObject product = response.getJSONObject("product");
-                            String productName = product.getString("product_name");
-                            String allergens = product.getString("allergens");
-
-                            if (allergens.equals("")) {
-                                //tvNoAllergens.setVisibility(View.VISIBLE);
-                                //tvNoAllergens.setText(R.string.no_allergens);
-                            } else {
-
-                                // Separar la cadena en una matriz de cadenas
-                                String[] allergensArray = allergens.split(",");
-
-                                // Crear una lista de nombres de alérgenos
-                                List<String> allergensList = new ArrayList<>();
-                                for (String allergen : allergensArray) {
-                                    // Eliminar la cadena "en:" de cada alérgeno
-                                    String name = allergen.substring(3);
-                                    allergensList.add(name);
-
-                                }
-
-                                // Usar la lista de nombres de alérgenos para crear la lista de elementos en la ListView
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                                        R.layout.item, R.id.tv_allergen_name, allergensList);
-                                //listView.setAdapter(adapter);
-
-                            }
-
-
-                            // Actualiza la interfaz de usuario con la información obtenida
-                            //productNameTextView.setText(productName);
-
-                            // Carga la imagen del producto en el ImageView usando Volley
-                            String imageUrl = product.getString("image_front_small_url");
-                            //loadImage(imageUrl, ivProducto, productName);
-
-//                            mAuth = FirebaseAuth.getInstance();
-//                            FirebaseUser currentUser = mAuth.getCurrentUser();
-//                            if (currentUser != null) {
-//                                Intent intent = new Intent(getApplicationContext(), Search.class);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putString("nombre", productName);
-//
-//                                Bitmap bitmap = ((BitmapDrawable) ivProducto.getDrawable()).getBitmap();
-//                                bundle.putParcelable("miImagen", bitmap);
-//
-//                                intent.putExtras(bundle);
-//                                startActivity(intent);
-//                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Maneja el error de la solicitud
-                        error.printStackTrace();
-                    }
-                });
-
-        // Agrega la solicitud a la cola de solicitudes de Volley
-        Volley.newRequestQueue(this).add(jsonObjectRequest);
-    }
-
-    private void loadImage(String imageUrl, ImageView ivProducto, String productName) {
+    private void loadImage(String productName, String imageUrl) {
         ImageRequest imageRequest = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 // Actualiza la interfaz de usuario con la imagen cargada
-                ivProducto.setImageBitmap(response);
-                ivProducto.setVisibility(View.VISIBLE);
+                //ivProducto.setImageBitmap(response);
+                //ivProducto.setVisibility(View.VISIBLE);
 
                 //mAuth = FirebaseAuth.getInstance();
                 //FirebaseUser currentUser = mAuth.getCurrentUser();

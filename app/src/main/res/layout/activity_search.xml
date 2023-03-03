@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:hint="Search"/>
 
-    <ListView
-        android:id="@+id/list_view_products"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_products"
         android:layout_width="match_parent"
         android:layout_height="670dp"
         tools:listitem="@layout/list_item_product" />

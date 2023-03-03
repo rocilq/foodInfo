@@ -73,46 +73,44 @@ public class ProductInfo extends AppCompatActivity {
     public void jsonRequest(String codigo) {
         String url = "https://world.openfoodfacts.org/api/v0/product/" + codigo + ".json";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            // Procesa la respuesta de la API
-                            JSONObject product = response.getJSONObject("product");
-                            String productName = product.getString("product_name");
-                            String allergens = product.getString("allergens");
+                response -> {
+                    try {
+                        // Procesa la respuesta de la API
+                        JSONObject product = response.getJSONObject("product");
+                        String productName = product.getString("product_name");
+                        String allergens = product.getString("allergens");
 
-                            if (allergens.equals("")) {
-                                tvNoAllergens.setVisibility(View.VISIBLE);
-                                tvNoAllergens.setText(R.string.no_allergens);
-                            } else {
+                        if (allergens.equals("")) {
+                            tvNoAllergens.setVisibility(View.VISIBLE);
+                            tvNoAllergens.setText(R.string.no_allergens);
+                        } else {
 
-                                // Separar la cadena en una matriz de cadenas
-                                String[] allergensArray = allergens.split(",");
+                            // Separar la cadena en una matriz de cadenas
+                            String[] allergensArray = allergens.split(",");
 
-                                // Crear una lista de nombres de alérgenos
-                                List<String> allergensList = new ArrayList<>();
-                                for (String allergen : allergensArray) {
-                                    // Eliminar la cadena "en:" de cada alérgeno
-                                    String name = allergen.substring(3);
-                                    allergensList.add(name);
-
-                                }
-
-                                // Usar la lista de nombres de alérgenos para crear la lista de elementos en la ListView
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                                        R.layout.item, R.id.tv_allergen_name, allergensList);
-                                listView.setAdapter(adapter);
+                            // Crear una lista de nombres de alérgenos
+                            List<String> allergensList = new ArrayList<>();
+                            for (String allergen : allergensArray) {
+                                // Eliminar la cadena "en:" de cada alérgeno
+                                String name = allergen.substring(3);
+                                allergensList.add(name);
 
                             }
 
+                            // Usar la lista de nombres de alérgenos para crear la lista de elementos en la ListView
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
+                                    R.layout.item, R.id.tv_allergen_name, allergensList);
+                            listView.setAdapter(adapter);
 
-                            // Actualiza la interfaz de usuario con la información obtenida
-                            productNameTextView.setText(productName);
+                        }
 
-                            // Carga la imagen del producto en el ImageView usando Volley
-                            String imageUrl = product.getString("image_front_small_url");
-                            loadImage(imageUrl, ivProducto, productName);
+
+                        // Actualiza la interfaz de usuario con la información obtenida
+                        productNameTextView.setText(productName);
+
+                        // Carga la imagen del producto en el ImageView usando Volley
+                        String imageUrl = product.getString("image_front_small_url");
+                        loadImage(imageUrl, ivProducto, productName);
 
 //                            mAuth = FirebaseAuth.getInstance();
 //                            FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -128,9 +126,8 @@ public class ProductInfo extends AppCompatActivity {
 //                                startActivity(intent);
 //                            }
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 },
                 new Response.ErrorListener() {
