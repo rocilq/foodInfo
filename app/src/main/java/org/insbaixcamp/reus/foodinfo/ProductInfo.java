@@ -1,5 +1,7 @@
 package org.insbaixcamp.reus.foodinfo;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -26,7 +28,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 
 public class ProductInfo extends AppCompatActivity {
@@ -39,6 +44,7 @@ public class ProductInfo extends AppCompatActivity {
     String codigo;
     private TextView productNameTextView;
     ListView listView;
+    List<String> lCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +70,7 @@ public class ProductInfo extends AppCompatActivity {
 
     }
 
-    private void jsonRequest(String codigo) {
+    public void jsonRequest(String codigo) {
         String url = "https://world.openfoodfacts.org/api/v0/product/" + codigo + ".json";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -149,15 +155,18 @@ public class ProductInfo extends AppCompatActivity {
 
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser currentUser = mAuth.getCurrentUser();
-                if (currentUser != null) {
+                /*if (currentUser != null) {
                     Bitmap image = ((BitmapDrawable) ivProducto.getDrawable()).getBitmap();
-                    Product product = new Product(productName, image, codigo);
 
-                    // Agregar el objeto a la lista ProductList si no está duplicado
-                    ProductList productList = ProductList.getInstance();
-                    productList.addProduct(product);
+                    Code code = new Code(lCode);
 
-                }
+                    code.addCode(codigo);
+
+//                    // Agregar el objeto a la lista ProductList si no está duplicado
+//                    ProductList productList = ProductList.getInstance();
+//                    productList.addProduct(product);
+
+                }*/
 
             }
         }, 0, 0, ImageView.ScaleType.CENTER_CROP, null,

@@ -16,9 +16,9 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAdapter extends ArrayAdapter<Product> implements Filterable {
+public class ProductAdapter /*extends ArrayAdapter<Product> implements Filterable*/ {
 
-    private Context mContext;
+    /*private Context mContext;
     private List<Product> mProductList;
     private List<Product> mFilteredProductList;
 
@@ -88,7 +88,7 @@ public class ProductAdapter extends ArrayAdapter<Product> implements Filterable 
             }
         };
         return filter;
-    }
+    }*/
 }
 
 

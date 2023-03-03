@@ -11,6 +11,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -22,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private String ultimoCodigo = "";
 
     private FirebaseAuth mAuth;
+
+    private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = fbDatabase.getReference("usuarios");
 
     private final ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
         if (result.getContents() == null) {
@@ -36,8 +44,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
 //            jsonRequest(ultimoCodigo);
+            mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            if (currentUser != null) {
+
+                addCode(ultimoCodigo);
+
+
+            } else {
+
+            }
+
         }
     });
+
 
 
     @Override
@@ -91,6 +111,37 @@ public class MainActivity extends AppCompatActivity {
         options.setCaptureActivity(ActivityCap.class);
 
         barLauncher.launch(options);
+    }
+
+
+    private void addCode(String code) {
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        assert user != null;
+        String userId = user.getUid();
+
+        // Consultar la base de datos para verificar si el código ya existe
+        myRef.child(userId).orderByValue().equalTo(code).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Si el código no existe en la base de datos, guardarlo
+                if (!dataSnapshot.exists()) {
+                    myRef.child(userId).push().setValue(code);
+                } else {
+                    // Si el código ya existe, mostrar un mensaje de error o hacer algo más
+                    Toast.makeText(MainActivity.this, "El código de barras ya ha sido registrado", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Manejar el error si la consulta falla
+            }
+        });
+
+
     }
 
 }

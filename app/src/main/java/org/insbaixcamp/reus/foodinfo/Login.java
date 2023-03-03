@@ -116,7 +116,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void signIn(String email, String password) {
-        // [START sign_in_with_email]
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -136,7 +136,7 @@ public class Login extends AppCompatActivity {
                         }
                     }
                 });
-        // [END sign_in_with_email]
+
     }
 
     private void updateUI(FirebaseUser user) {

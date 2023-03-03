@@ -3,7 +3,7 @@ package org.insbaixcamp.reus.foodinfo;
 import java.util.ArrayList;
 
 public class ProductList {
-    private static ProductList instance;
+    /*private static ProductList instance;
     private ArrayList<Product> productList;
 
     private ProductList() {
@@ -33,5 +33,5 @@ public class ProductList {
         return productList;
     }
 
-    public void setProducts(ArrayList<Product> products) { productList = products; }
+    public void setProducts(ArrayList<Product> products) { productList = products; }*/
 }
