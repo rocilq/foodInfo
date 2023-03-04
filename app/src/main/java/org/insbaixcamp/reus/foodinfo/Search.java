@@ -71,6 +71,8 @@ public class Search extends AppCompatActivity {
                     // Aquí puedes usar la lista de códigos de barras para lo que necesites
                     List<Product> productList = new ArrayList<>();
                     for (String barcode : barcodesList) {
+
+
                         String url = "https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json";
                         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                                 response -> {
@@ -84,7 +86,7 @@ public class Search extends AppCompatActivity {
                                         RecyclerView recyclerView = findViewById(R.id.rv_products);
                                         recyclerView.setLayoutManager(new LinearLayoutManager(Search.this));
 
-                                        recyclerView.setAdapter(adapter);
+
 
                                         adapter.setOnClickListener(new View.OnClickListener() {
                                             @Override
@@ -96,6 +98,8 @@ public class Search extends AppCompatActivity {
                                                 startActivity(intent);
                                             }
                                         });
+
+                                        recyclerView.setAdapter(adapter);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
