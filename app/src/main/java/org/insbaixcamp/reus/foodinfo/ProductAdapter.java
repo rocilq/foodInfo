@@ -2,6 +2,10 @@ package org.insbaixcamp.reus.foodinfo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +29,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private List<Product> productList;
     private View.OnClickListener listener;
 
+    private OnProductClickListener mListener;
+
+    public void setOnProductClickListener(OnProductClickListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnProductClickListener {
+        void onProductClick(int position);
+    }
+
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
@@ -43,8 +57,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = productList.get(position);
+
+        if (holder.getAdapterPosition() != RecyclerView.NO_POSITION){
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mListener != null) {
+                        mListener.onProductClick(holder.getAdapterPosition());
+                    }
+                }
+            });
+
+       }
+
+
         holder.nameTextView.setText(product.getName());
-        Picasso.get().load(product.getImageUrl()).into(holder.imageView);
+
+
+        Picasso.get().load(product.getImageUrl()).placeholder(R.drawable.nodisponible).into(holder.imageView);
+
+
     }
 
     @Override

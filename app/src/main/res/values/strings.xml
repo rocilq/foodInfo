@@ -18,4 +18,5 @@
     <string name="product_name">Nombre del producto</string>
 
     <string name="logout">Logout</string>
+    <string name="error">No se encontraron datos, o el codigo de barras no se leyó correctamente.</string>
 </resources>

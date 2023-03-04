@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -129,6 +130,12 @@ public class ProductInfo extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+                    if (response.isNull("product")) {
+                        productNameTextView.setText(R.string.error);
+                        productNameTextView.setGravity(Gravity.CENTER);
+                    }
+
                 },
                 new Response.ErrorListener() {
                     @Override

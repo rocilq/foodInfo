@@ -2,18 +2,13 @@ package org.insbaixcamp.reus.foodinfo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 
 import com.android.volley.Request;
@@ -34,12 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Search extends AppCompatActivity {
 
@@ -73,49 +66,44 @@ public class Search extends AppCompatActivity {
 
                     // Aquí puedes usar la lista de códigos de barras para lo que necesites
                     List<Product> productList = new ArrayList<>();
+                    AtomicInteger requestsCompleted = new AtomicInteger();
+
                     for (String barcode : barcodesList) {
-
-
                         String url = "https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json";
                         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                                 response -> {
                                     try {
-
-
-
                                         JSONObject productJson = response.getJSONObject("product");
                                         String name = productJson.getString("product_name");
                                         String imageUrl = productJson.getString("image_front_small_url");
-                                        Product product = new Product(name, imageUrl);
+                                        Product product = new Product(name, imageUrl,barcode); // Agregar el código de barras al producto);
                                         productList.add(product);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    requestsCompleted.getAndIncrement();
+                                    if (requestsCompleted.get() == barcodesList.size()) {
+                                        // All requests have completed, so create adapter and set it on RecyclerView
                                         ProductAdapter adapter = new ProductAdapter(Search.this, productList);
                                         RecyclerView recyclerView = findViewById(R.id.rv_products);
                                         recyclerView.setLayoutManager(new LinearLayoutManager(Search.this));
-
-
-
-                                        adapter.setOnClickListener(new View.OnClickListener() {
+                                        adapter.setOnProductClickListener(new ProductAdapter.OnProductClickListener() {
                                             @Override
-                                            public void onClick(View view) {
-                                                int position = recyclerView.getChildLayoutPosition(view);
-                                                String barcode = barcodesList.get(position);
+                                            public void onProductClick(int position) {
+                                                Product product = productList.get(position);
+                                                String barcode = product.getBarcode();
                                                 Intent intent = new Intent(getApplicationContext(), ProductInfo.class);
                                                 intent.putExtra("codigo", barcode);
                                                 startActivity(intent);
                                             }
                                         });
-
                                         recyclerView.setAdapter(adapter);
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
                                     }
                                 },
                                 error -> {
-                                    // Manejar errores en la solicitud a la API
+                                    // Handle errors in API request
                                 });
                         Volley.newRequestQueue(Search.this).add(request);
-
                         request.setRetryPolicy(new RetryPolicy() {
                             @Override
                             public int getCurrentTimeout() {
@@ -133,7 +121,6 @@ public class Search extends AppCompatActivity {
                             }
                         });
                     }
-
                 }
 
                 @Override

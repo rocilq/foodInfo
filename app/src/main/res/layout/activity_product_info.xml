@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +14,7 @@
         android:id="@+id/ivProducto"
         android:layout_width="324dp"
         android:layout_height="304dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/nodisponible"/>
 
     <TextView
         android:id="@+id/productNameTextView"
