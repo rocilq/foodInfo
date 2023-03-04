@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -51,6 +52,8 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+
+
         // Obtener la instancia de la base de datos
         FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
         myRef = fbDatabase.getReference("usuarios");
@@ -77,6 +80,9 @@ public class Search extends AppCompatActivity {
                         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                                 response -> {
                                     try {
+
+
+
                                         JSONObject productJson = response.getJSONObject("product");
                                         String name = productJson.getString("product_name");
                                         String imageUrl = productJson.getString("image_front_small_url");
@@ -109,6 +115,23 @@ public class Search extends AppCompatActivity {
                                     // Manejar errores en la solicitud a la API
                                 });
                         Volley.newRequestQueue(Search.this).add(request);
+
+                        request.setRetryPolicy(new RetryPolicy() {
+                            @Override
+                            public int getCurrentTimeout() {
+                                return 50000;
+                            }
+
+                            @Override
+                            public int getCurrentRetryCount() {
+                                return 50000;
+                            }
+
+                            @Override
+                            public void retry(VolleyError error) throws VolleyError {
+
+                            }
+                        });
                     }
 
                 }
