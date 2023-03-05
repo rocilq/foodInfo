@@ -150,6 +150,13 @@ public class ProductInfo extends AppCompatActivity {
     }
 
     private void loadImage(String imageUrl, ImageView ivProducto, String productName) {
+
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            // Establece la imagen por defecto
+            ivProducto.setImageResource(R.drawable.nodisponible);
+            return;
+        }
+
         ImageRequest imageRequest = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {

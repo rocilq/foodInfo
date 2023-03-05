@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -75,7 +77,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.nameTextView.setText(product.getName());
 
 
-        Picasso.get().load(product.getImageUrl()).placeholder(R.drawable.nodisponible).into(holder.imageView);
+//        Picasso.get().load(product.getImageUrl()).placeholder(R.drawable.nodisponible).into(holder.imageView);
+
+        // Verificar si la imagen del producto es nula o no válida
+        if (product.getImageUrl() == null || product.getImageUrl().isEmpty() || !Patterns.WEB_URL.matcher(product.getImageUrl()).matches()) {
+            // Si la imagen es nula o no válida, establecer la imagen por defecto
+            holder.imageView.setImageResource(R.drawable.nodisponible);
+        } else {
+            // Si la imagen es válida, cargarla en el ImageView con Picasso
+            Picasso.get().load(product.getImageUrl()).placeholder(R.drawable.nodisponible).into(holder.imageView);
+        }
 
 
     }
