@@ -49,9 +49,6 @@ public class Search extends AppCompatActivity {
         // Inicializar el SearchView
         SearchView searchView = findViewById(R.id.search_view);
 
-
-
-
         // Obtener la instancia de la base de datos
         FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
         myRef = fbDatabase.getReference("usuarios");
@@ -153,88 +150,6 @@ public class Search extends AppCompatActivity {
 
     }
 
-
-
-    private void loadImage(String productName, String imageUrl) {
-        ImageRequest imageRequest = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                // Actualiza la interfaz de usuario con la imagen cargada
-                //ivProducto.setImageBitmap(response);
-                //ivProducto.setVisibility(View.VISIBLE);
-
-                //mAuth = FirebaseAuth.getInstance();
-                //FirebaseUser currentUser = mAuth.getCurrentUser();
-                /*if (currentUser != null) {
-                    Bitmap image = ((BitmapDrawable) ivProducto.getDrawable()).getBitmap();
-
-                    Code code = new Code(lCode);
-
-                    code.addCode(codigo);
-
-//                    // Agregar el objeto a la lista ProductList si no está duplicado
-//                    ProductList productList = ProductList.getInstance();
-//                    productList.addProduct(product);
-
-                }*/
-
-            }
-        }, 0, 0, ImageView.ScaleType.CENTER_CROP, null,
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Maneja el error de la solicitud
-                        error.printStackTrace();
-                    }
-                });
-
-        // Agrega la solicitud a la cola de solicitudes de Volley
-        Volley.newRequestQueue(this).add(imageRequest);
-    }
-
-
-       /* private ProductAdapter mAdapter;
-        private ListView mListViewProducts;
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_search);
-            Objects.requireNonNull(getSupportActionBar()).hide();
-
-            // Inicializar el SearchView
-            SearchView searchView = findViewById(R.id.search_view);
-
-            // Obtén la lista de productos
-            Code code = Code.getInstance();
-
-
-
-            // Crea un adaptador personalizado
-            mAdapter = new ProductAdapter(this, productList.getProducts());
-
-            // Configura la ListView
-            mListViewProducts = findViewById(R.id.list_view_products);
-            mListViewProducts.setAdapter(mAdapter);
-
-            // Agregar un listener para el SearchView
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    // Filtrar los elementos de la lista
-                    mAdapter.getFilter().filter(newText);
-                    return false;
-                }
-            });
-
-
-            //
-        }*/
 
 
 }

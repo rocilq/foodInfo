@@ -41,13 +41,13 @@ public class ProductInfo extends AppCompatActivity {
 
     TextView tvNoAllergens;
 
-    private FirebaseAuth mAuth;
+
 
     ImageView ivProducto;
     String codigo;
     private TextView productNameTextView;
     ListView listView;
-    List<String> lCode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +65,6 @@ public class ProductInfo extends AppCompatActivity {
 
         tvNoAllergens = findViewById(R.id.tvNoAllergens);
         tvNoAllergens.setVisibility(View.GONE);
-//        // Mostrar el código en un TextView, por ejemplo
-//        tvprueba = findViewById(R.id.tvPrueba);
-//        tvprueba.setText(codigo);
 
         jsonRequest(codigo);
 
@@ -140,19 +137,6 @@ public class ProductInfo extends AppCompatActivity {
                         String imageUrl = product.getString("image_front_small_url");
                         loadImage(imageUrl, ivProducto, productName);
 
-//                            mAuth = FirebaseAuth.getInstance();
-//                            FirebaseUser currentUser = mAuth.getCurrentUser();
-//                            if (currentUser != null) {
-//                                Intent intent = new Intent(getApplicationContext(), Search.class);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putString("nombre", productName);
-//
-//                                Bitmap bitmap = ((BitmapDrawable) ivProducto.getDrawable()).getBitmap();
-//                                bundle.putParcelable("miImagen", bitmap);
-//
-//                                intent.putExtras(bundle);
-//                                startActivity(intent);
-//                            }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -191,20 +175,6 @@ public class ProductInfo extends AppCompatActivity {
                 ivProducto.setImageBitmap(response);
                 ivProducto.setVisibility(View.VISIBLE);
 
-                mAuth = FirebaseAuth.getInstance();
-                FirebaseUser currentUser = mAuth.getCurrentUser();
-                /*if (currentUser != null) {
-                    Bitmap image = ((BitmapDrawable) ivProducto.getDrawable()).getBitmap();
-
-                    Code code = new Code(lCode);
-
-                    code.addCode(codigo);
-
-//                    // Agregar el objeto a la lista ProductList si no está duplicado
-//                    ProductList productList = ProductList.getInstance();
-//                    productList.addProduct(product);
-
-                }*/
 
             }
         }, 0, 0, ImageView.ScaleType.CENTER_CROP, null,
