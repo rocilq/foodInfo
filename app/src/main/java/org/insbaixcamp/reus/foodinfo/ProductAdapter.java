@@ -25,11 +25,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements View.OnClickListener {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements View.OnClickListener, Filterable {
 
     private Context context;
     private List<Product> productList;
     private View.OnClickListener listener;
+    private List<Product> mFilteredProductList;
 
     private OnProductClickListener mListener;
 
@@ -116,6 +117,37 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             imageView = itemView.findViewById(R.id.product_image);
             nameTextView = itemView.findViewById(R.id.product_name);
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults filterResults = new FilterResults();
+                if (constraint == null || constraint.length() == 0) {
+                    filterResults.count = productList.size();
+                    filterResults.values = productList;
+                } else {
+                    List<Product> filteredProducts = new ArrayList<>();
+                    for (Product product : productList) {
+                        if (product.getName().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                            filteredProducts.add(product);
+                        }
+                    }
+                    filterResults.count = filteredProducts.size();
+                    filterResults.values = filteredProducts;
+                }
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mFilteredProductList = (List<Product>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+        return filter;
     }
 
 }

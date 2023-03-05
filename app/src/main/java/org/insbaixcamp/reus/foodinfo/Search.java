@@ -2,6 +2,7 @@ package org.insbaixcamp.reus.foodinfo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +45,10 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        // Inicializar el SearchView
+        SearchView searchView = findViewById(R.id.search_view);
+
 
 
 
@@ -98,6 +103,22 @@ public class Search extends AppCompatActivity {
                                             }
                                         });
                                         recyclerView.setAdapter(adapter);
+
+                                        // Agregar un listener para el SearchView
+                                        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                            @Override
+                                            public boolean onQueryTextSubmit(String query) {
+                                                return false;
+                                            }
+
+                                            @Override
+                                            public boolean onQueryTextChange(String newText) {
+                                                // Filtrar los elementos de la lista
+                                                adapter.getFilter().filter(newText);
+                                                return false;
+                                            }
+                                        });
+
                                     }
                                 },
                                 error -> {

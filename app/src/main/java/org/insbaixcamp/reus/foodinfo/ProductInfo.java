@@ -30,9 +30,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Objects;
 
 public class ProductInfo extends AppCompatActivity {
@@ -85,6 +87,31 @@ public class ProductInfo extends AppCompatActivity {
                             tvNoAllergens.setVisibility(View.VISIBLE);
                             tvNoAllergens.setText(R.string.no_allergens);
                         } else {
+
+                            Map<String, String> allergenTranslations = new HashMap<>();
+                            allergenTranslations.put("milk", "leche");
+                            allergenTranslations.put("nuts", "nueces");
+                            allergenTranslations.put("soybeans", "soja");
+                            allergenTranslations.put("mustard", "mostaza");
+                            allergenTranslations.put("mollusc", "moluscos");
+                            allergenTranslations.put("shellfish", "moluscos");
+                            allergenTranslations.put("peanuts", "cacahuetes");
+                            allergenTranslations.put("crustacean", "crustaceos");
+                            allergenTranslations.put("tree nuts", "trazas");
+                            allergenTranslations.put("fish", "pescado");
+                            allergenTranslations.put("egg", "huevos");
+                            allergenTranslations.put("eggs", "huevos");
+                            allergenTranslations.put("sulphur-dioxide-and-sulphites", "dióxido de azufre y sulfitos");
+                            allergenTranslations.put("sesame", "sesamo");
+                            allergenTranslations.put("soy", "soja");
+                            allergenTranslations.put("celery", "apio");
+                            allergenTranslations.put("lupines", "altramuces");
+
+
+                            for (Map.Entry<String, String> entry : allergenTranslations.entrySet()) {
+                                allergens = allergens.replace(entry.getKey(), entry.getValue());
+                            }
+
 
                             // Separar la cadena en una matriz de cadenas
                             String[] allergensArray = allergens.split(",");
