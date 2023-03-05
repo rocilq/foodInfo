@@ -45,6 +45,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
+        mFilteredProductList = productList;
     }
 
     @NonNull
@@ -59,7 +60,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product product = productList.get(position);
+        Product product = mFilteredProductList.get(position);
 
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION){
 
@@ -94,11 +95,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return productList.size();
-    }
-
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listener = listener;
+        return mFilteredProductList != null ? mFilteredProductList.size() : 0;
     }
 
     @Override
@@ -148,6 +145,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             }
         };
         return filter;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+        mFilteredProductList = productList;
+        notifyDataSetChanged();
     }
 
 }

@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
         if (result.getContents() == null) {
-            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            Log.d("state", "cancelled");
         } else {
             String codigo = result.getContents();
             ultimoCodigo = codigo;
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Search.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "You have to login to see the products scanned" , Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Tienes que iniciar sesión para ver los productos escaneados" , Toast.LENGTH_LONG).show();
         }
     }
 
